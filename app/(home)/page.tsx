@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable react/jsx-no-comment-textnodes */
-// app/page.tsx (or app/page.jsx)
-// eslint-disable-next-line @next/next/no-img-element
 import Link from "next/link";
 import React from "react";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+
 const movieTitles = [
   "Batman",
   "Avengers",
@@ -49,24 +50,33 @@ export default async function Home() {
   const data = await response.json();
   const movies = data.Search || [];
 
+
   return (
-    <div className="w-full p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+    <div className="w-full p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 overflow-x-hidden min-h-screen bg-white dark:bg-black">
       {movies.length > 0 ? (
         //@ts-expect-error
         movies.map((movie, index) => (
           <Link href={`/movie/${movie.imdbID}`} key={index}>
-            <div
-              key={movie.imdbID}
-              className="border p-2 rounded shadow h-auto"
-            >
-              <img
-                src={movie.Poster}
-                alt={movie.Title}
-                className="w-full object-fill h-[300px] mb-2"
-              />
-              <h2 className="text-lg font-semibold">{movie.Title}</h2>
-              <p>{movie.Year}</p>
-            </div>
+            <Card className="border-gray-300 dark:border-gray-600 border-2 h-[350px] hover:shadow-lg dark:hover:shadow-gray-800 transition-shadow duration-300 cursor-pointer group overflow-hidden p-0">
+              <div className="relative overflow-hidden">
+                <img
+                  src={movie.Poster}
+                  alt={movie.Title}
+                  className="w-full h-[300px] object-fill group-hover:scale-105 transition-transform duration-300"
+                />
+                <Badge className="absolute top-2 right-2 bg-black/70 text-white">
+                  {movie.Type?.toUpperCase()}
+                </Badge>
+              </div>
+              <CardContent className="p-3">
+                <h2 className="text-xl font-semibold line-clamp-2 mb-1">
+                  {movie.Title.slice(0,55)}
+                </h2>
+              </CardContent>
+              <CardFooter className="p-3 pt-1">
+                <Badge variant="secondary" className="text-xs">{movie.Year}</Badge>
+              </CardFooter>
+            </Card>
           </Link>
         ))
       ) : (
@@ -75,3 +85,5 @@ export default async function Home() {
     </div>
   );
 }
+
+

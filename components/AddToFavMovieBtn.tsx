@@ -9,15 +9,19 @@ import { useContext } from "react";
 const AddToFavMovieBtn = ({ movie }) => {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   //@ts-ignore
-  const { handleAddFavMovie } = useContext(AppContext);
+  const { handleAddFavMovie, theme } = useContext(AppContext);
 
   return (
     //@ts-nocheck
     <button
       onClick={() => handleAddFavMovie(movie)}
-      className="bg-blue-500 px-2 py-1 rounded-md mt-3"
+      className={`px-4 py-1 rounded-md mt-3 ${
+        theme === "dark"
+          ? "bg-blue-700 text-white hover:bg-blue-600"
+          : "bg-blue-500 text-white hover:bg-blue-600"
+      }`}
     >
-      Favourite +
+      WatchList +
     </button>
   );
 };

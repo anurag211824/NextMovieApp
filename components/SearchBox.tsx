@@ -1,7 +1,11 @@
-"use client"; // if you're using Next.js
+"use client";
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Search } from "lucide-react";
+
 const SearchBox = () => {
   const [query, setQuery] = useState("");
 
@@ -16,22 +20,24 @@ const SearchBox = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex items-center gap-2 w-full max-w-md mx-auto p-2"
+      className="flex items-center w-full relative"
     >
-      <input
+      <Input
         type="text"
-        placeholder="Search for a movie..."
+        placeholder="Search movies..."
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="flex-1 pr-8 h-8 md:h-9 text-sm"
       />
-      <Link href={`/search/query?movie=${query}`}>
-        <button
-          type="submit"
-          className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+      <Link href={`/search?movie=${query}`}>
+        <Button 
+          type="submit" 
+          size="sm" 
+          variant="ghost"
+          className="absolute right-0 top-1/2 transform -translate-y-1/2 h-6 w-6 md:h-7 md:w-7 p-0"
         >
-          Search
-        </button>
+          <Search className="h-3 w-3 md:h-4 md:w-4" />
+        </Button>
       </Link>
     </form>
   );
