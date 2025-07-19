@@ -1,6 +1,7 @@
 'use server';
 import { cookies } from "next/headers";
 import users from "@/database/usersdata";
+import { redirect } from "next/navigation";
 
 export async function loginUser(username: string, password: string) {
   const userCookies = await cookies();
@@ -24,5 +25,6 @@ export async function loginUser(username: string, password: string) {
 export async function logoutUser() {
   const userCookies = await cookies();
   userCookies.delete("authToken");
+  redirect("/login")
   return { success: true, message: "Logout successful" };
 }

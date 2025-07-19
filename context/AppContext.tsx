@@ -11,12 +11,15 @@ export interface Movie {
 }
 export interface AppContextType {
   theme: string;
+  loginout:string,
   toggleTheme: () => void;
   favMovie: Movie[];
   setfavMovie: React.Dispatch<React.SetStateAction<Movie[]>>;
+  setloginout:React.Dispatch<React.SetStateAction<string>>;
   handleAddFavMovie: (movie: Movie) => void;
   removeFavMovie: (id: string) => void;
 }
+
 
 // --- Context ---
 export const AppContext = createContext<AppContextType | null>(null);
@@ -25,6 +28,7 @@ export const AppContext = createContext<AppContextType | null>(null);
 export const AppProvider = ({ children }: { children: ReactNode }) => {
   const [theme, setTheme] = useState("light");
   const [favMovie, setfavMovie] = useState<Movie[]>([]);
+  const [loginout,setloginout] =  useState<string>("logout");
 
   useEffect(() => {
     const storedTheme = localStorage.getItem("theme");
@@ -67,6 +71,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         setfavMovie,
         handleAddFavMovie,
         removeFavMovie,
+        loginout,
+        setloginout,
       }}
     >
       {children}

@@ -15,6 +15,9 @@ import { redirect } from "next/navigation";
 export default function LoginPage() {
   const context = useContext(AppContext);
   const theme = context?.theme || "light";
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  //@ts-ignore
+  const {setloginout} = context
   
   const [formData, setFormData] = useState({
     username: "",
@@ -46,6 +49,7 @@ export default function LoginPage() {
       return;
     }
     else{
+         setloginout("login")
          redirect("/")
     }
   };
@@ -120,7 +124,7 @@ export default function LoginPage() {
               className="w-full bg-blue-600 text-white hover:bg-blue-700 transition-colors"
               disabled={isLoading || !formData.username || !formData.password}
             >
-              {isLoading ? "Signing in..." : "Sign In"}
+              {isLoading ? "Logging in..." : "Login In"}
             </Button>
           </form>
 

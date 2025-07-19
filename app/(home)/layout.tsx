@@ -4,6 +4,7 @@ import { AppContext } from "@/context/AppContext";
 import { Theme } from "@radix-ui/themes";
 import { Button } from "@/components/ui/button";
 import { Sun, Moon, User } from "lucide-react";
+import { logoutUser } from "@/serveractions/actions";
 
 import Link from "next/link";
 import SearchBox from "@/components/SearchBox";
@@ -12,7 +13,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const context = useContext(AppContext);
   if (!context) throw new Error("MovieContext must be used within AppProvider");
 
-  const { theme, toggleTheme } = context;
+  const { theme, toggleTheme,loginout } = context;
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
@@ -46,7 +47,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               className="flex items-center gap-2"
             >
               <User className="h-4 w-4" />
-              <Link className="hidden sm:inline" href="/login">Login</Link>
+              {
+                loginout === "logout" ? ( <Link className="hidden sm:inline" href="/login">Login</Link>) :
+                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                 //@ts-ignore
+                 (<form action={logoutUser}>
+                  <button className="hidden sm:inline" type = "submit">Logout</button>
+                 </form>)
+              }
             </Button>
           </div>
         </header>
