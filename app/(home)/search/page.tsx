@@ -152,9 +152,9 @@ const MovieSearchPage = ({ searchParams }: PageProps) => {
               </CardContent>
 
               <CardFooter className="p-2 pt-0 mt-auto">
-                <div className="w-full" onClick={(e) => e.preventDefault()}>
+                <Link href={"/favmovie"}  className="w-full" onClick={(e) => e.preventDefault()}>
                   <AddToFavMovieBtn movie={movie} />
-                </div>
+                </Link>
               </CardFooter>
             </Card>
           </Link>

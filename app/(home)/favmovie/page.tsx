@@ -78,9 +78,7 @@ const FavMoviePage = () => {
           My Favorite Movies
         </h1>
         <p
-          className={`${
-            theme === "dark" ? "text-gray-400" : "text-gray-600"
-          }`}
+          className={`${theme === "dark" ? "text-gray-400" : "text-gray-600"}`}
         >
           You have {favMovie.length} favorite movie
           {favMovie.length !== 1 ? "s" : ""}
@@ -91,7 +89,7 @@ const FavMoviePage = () => {
         {favMovie.map((movie, index) => (
           <Card
             key={index}
-            className="group hover:shadow-xl dark:hover:shadow-gray-800 transition-all duration-300 transform hover:scale-105 cursor-pointer overflow-hidden border-2 border-gray-300 dark:border-gray-700 hover:border-gray-400 dark:hover:border-gray-600 p-0"
+            className="flex flex-col justify-between group hover:shadow-xl dark:hover:shadow-gray-800 transition-all duration-300 transform hover:scale-105 cursor-pointer overflow-hidden border-2 border-gray-300 dark:border-gray-700 hover:border-gray-400 dark:hover:border-gray-600 p-0"
           >
             <Link href={`/movie/${movie.imdbID}`}>
               <div className="relative overflow-hidden">
@@ -101,7 +99,7 @@ const FavMoviePage = () => {
                   className="w-full h-[200px] object-fill group-hover:scale-110 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <Badge className="absolute top-2 right-2 bg-red-600 text-white shadow-lg text-xs">
+                <Badge className="absolute top-2 right-2 bg-blue-600 text-white shadow-lg text-xs">
                   FAVORITE
                 </Badge>
               </div>
@@ -139,15 +137,14 @@ const FavMoviePage = () => {
               </CardContent>
             </Link>
 
-            <CardFooter className="p-2 pt-0">
+            <CardFooter className="p-2 pt-0 ">
               <Button
                 onClick={(e) => {
                   e.stopPropagation();
                   removeFavMovie(movie.imdbID);
                 }}
-                variant="destructive"
                 size="sm"
-                className="w-full flex items-center gap-2"
+                className="w-full flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white border-0"
               >
                 <Trash2 className="h-3 w-3" />
                 Remove
@@ -159,6 +156,5 @@ const FavMoviePage = () => {
     </div>
   );
 };
-
 
 export default FavMoviePage;

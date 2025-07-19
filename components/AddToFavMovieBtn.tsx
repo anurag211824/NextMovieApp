@@ -15,7 +15,7 @@ const AddToFavMovieBtn = ({ movie }) => {
     //@ts-nocheck
     <button
       onClick={() => handleAddFavMovie(movie)}
-      className={`px-4 py-1 rounded-md mt-3 ${
+      className={` cursor-pointer px-4 py-1 rounded-md mt-3 ${
         theme === "dark"
           ? "bg-blue-700 text-white hover:bg-blue-600"
           : "bg-blue-500 text-white hover:bg-blue-600"

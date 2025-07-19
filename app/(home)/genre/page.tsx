@@ -130,7 +130,7 @@ const GenrePage = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {movies.map((movie: Movie, index: number) => (
             <Link href={`/movie/${movie.imdbID}`} key={index}>
-              <Card className="group hover:shadow-xl dark:hover:shadow-gray-800 transition-all duration-300 transform hover:scale-105 cursor-pointer overflow-hidden border-2 border-gray-300 dark:border-gray-700 hover:border-gray-400 dark:hover:border-gray-600 p-0">
+              <Card className="group h-[300px] hover:shadow-xl dark:hover:shadow-gray-800 transition-all duration-300 transform hover:scale-105 cursor-pointer overflow-hidden border-2 border-gray-300 dark:border-gray-700 hover:border-gray-400 dark:hover:border-gray-600 p-0">
                 <div className="relative overflow-hidden">
                   <img
                     src={movie.Poster !== "N/A" ? movie.Poster : "/no-image.jpg"}

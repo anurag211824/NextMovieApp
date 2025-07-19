@@ -46,7 +46,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               className="flex items-center gap-2"
             >
               <User className="h-4 w-4" />
-              <span className="hidden sm:inline">Login</span>
+              <Link className="hidden sm:inline" href="/login">Login</Link>
             </Button>
           </div>
         </header>
@@ -116,7 +116,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               onClick={() => setSidebarOpen(false)}
             >
               <button className="w-full bg-blue-500 hover:bg-blue-400 px-4 py-2 rounded flex items-center gap-2">
-                WatchList
+                WatchList +
               </button>
             </Link>
 
