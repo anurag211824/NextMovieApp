@@ -5,6 +5,7 @@ import { AppContext } from "@/context/AppContext";
 import React, { useEffect, useState } from "react";
 import { useContext } from "react";
 import Link from "next/link";
+
 interface Movie {
   Title: string;
   Year: string;
@@ -20,19 +21,29 @@ interface Movie {
 }
 
 interface PageProps {
-  params: { movieID: string };
+  params: Promise<{ movieID: string }>;
 }
 
 const MovieDetailPage = ({ params }: PageProps) => {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   //@ts-ignore
   const { theme } = useContext(AppContext);
-  const { movieID } = params;
   const [movie, setMovie] = useState<Movie | null>(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
+  const [movieID, setMovieID] = useState<string>("");
 
   useEffect(() => {
+    const getParams = async () => {
+      const resolvedParams = await params;
+      setMovieID(resolvedParams.movieID);
+    };
+    getParams();
+  }, [params]);
+
+  useEffect(() => {
+    if (!movieID) return;
+
     const fetchMovie = async () => {
       try {
         const response = await fetch(
@@ -47,7 +58,6 @@ const MovieDetailPage = ({ params }: PageProps) => {
         }
       } catch (err) {
         console.log(err);
-
         setError("Failed to fetch movie data.");
       } finally {
         setLoading(false);
@@ -124,7 +134,9 @@ const MovieDetailPage = ({ params }: PageProps) => {
             <strong>IMDb Rating:</strong> {movie.imdbRating}
           </li>
         </ul>
-     <Link href={`/favmovie`}><AddToFavMovieBtn movie={movie}/></Link>
+        <Link href={`/favmovie`}>
+          <AddToFavMovieBtn movie={movie}/>
+        </Link>
       </div>
     </div>
   );
